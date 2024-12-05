@@ -4,7 +4,7 @@ import { Component, input } from '@angular/core';
   selector: 'app-primary-button',
   imports: [],
   template: `
-    <button >
+    <button (click)="handleButtonClick()">
       {{label()}}
     </button>
   `,
@@ -14,5 +14,10 @@ export class PrimaryButtonComponent {
 
   //Marcamos con signal inputs
   label = input<string>('')
+
+  handleButtonClick() {
+
+  }
+
 
 }
