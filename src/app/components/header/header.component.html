@@ -1,7 +1,13 @@
 <!-- <p>{{title}}</p> -->
-<div class="bg-slate-400 px-4 py-3 shadow-md flex justify-between">
+<div class="bg-slate-400 px-4 py-3 shadow-md flex justify-between items-center">
     <!-- USANDO SIGNALS -->
     <!-- {{title()}} -->
-    <span>METAFRONTEND</span>
-    <app-primary-button label="Perfil"></app-primary-button>
+    <span class="text-2xl">METAFRONTEND</span>
+    <!-- <app-primary-button label="Perfil" (handleButtonClick)="showButtonClicked()"></app-primary-button> -->
+    <!-- Metemos en el atributo label el valor de la signal de la clase padre btnLabel -->
+    <!-- 
+        Renta hacerlo si vamos a pasarle valores signal variables, 
+        si no usamos la normal label="Perfil" y el evento 
+    -->
+    <app-primary-button [label]="btnLabel()" (handleButtonClick)="showButtonClicked()"></app-primary-button>
 </div>
