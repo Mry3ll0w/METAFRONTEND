@@ -1,0 +1,31 @@
+<button class="
+        bg-slate-400 shadow-lg 
+        border rounded-xl 
+        p-4 flex 
+        items-center
+        gap-4 
+        relative 
+        hover:bg-orange-400 hover:text-white
+        w-full max-w-lg
+        overflow-hidden
+    ">
+    <!-- Meter onClick para editar los usuarios -->
+    <div class="flex items-center gap-4 w-full">
+        <!-- Imagen a la izquierda -->
+        <img src="https://picsum.photos/200" alt="avatar" class="w-20 h-20 rounded-full object-cover flex-shrink-0">
+
+        <!-- Atributos del usuario a la derecha -->
+        <div class="flex flex-col gap-2 truncate">
+            <p class="h3 text-lg">Datos del usuario</p>
+            <p class="text-xl truncate">{{user().nombre}}, {{user().apellidos}}</p>
+            <p class="text-sm truncate">
+                <span class="font-bold">Usuario:</span>
+                @if (user().usuario == null) {
+                <span class="text-red-500">No definido</span>
+                }@else{
+                {{user().usuario}}
+                }
+            </p>
+        </div>
+    </div>
+</button>

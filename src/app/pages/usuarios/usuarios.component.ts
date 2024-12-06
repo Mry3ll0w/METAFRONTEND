@@ -1,9 +1,10 @@
 import { Component, signal } from '@angular/core';
 import { Usuario } from '../../models/Usuario';
+import { UserCardComponent } from './user-card/user-card.component';
 
 @Component({
   selector: 'app-usuarios',
-  imports: [],
+  imports: [UserCardComponent],
   templateUrl: './usuarios.component.html',
   styleUrl: './usuarios.component.sass'
 })

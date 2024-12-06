@@ -1,8 +1,6 @@
-<div class="p-8 grid grid-cols-2 gap-4">
+<div class="p-8 grid grid-cols-2 gap-6 relative">
     @for (usuario of lUsuarios(); track $index) {
-    {{
-    usuario.nombre + ' ' + usuario.apellidos
-    }}
+    <app-user-card [user]="usuario"></app-user-card>
     }
 
 </div>
