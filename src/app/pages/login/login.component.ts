@@ -30,7 +30,14 @@ export class LoginComponent implements OnInit {
     this.authService.getLogInToken(this.username(), this.password())
       .then((res) => {
         console.log("Valor de token " + res);
-        this.authService.setSessionToken(res)
+        if (res.success) {
+          this.authService.setSessionToken(res.token ?? '');
+        } else {
+          // Mostramos modal de error de login y borramos el token
+          this.authService.eraseSessionToken();
+          // Mostramos modal de error de login
+
+        }
       })
       ;
 
