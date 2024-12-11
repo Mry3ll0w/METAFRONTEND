@@ -1,16 +1,18 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { lastValueFrom } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthServiceService {
+export class AuthService {
 
   private baseUrl: String = 'http://localhost:8080/';
 
   //! Borrar en cuanto tengamos test
   // Fetches the users from the server, needs base auth header
-  async getLogInToken(user: string, password: string): Promise<any> {
+  async getLogInToken(user: string, password: string): Promise<string> {
+
 
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -20,21 +22,17 @@ export class AuthServiceService {
     var body = {
     }
 
-    this.http.post(
+    const res = await lastValueFrom(this.http.post(
       `${this.baseUrl}token`, body, { headers, responseType: 'text' }
-    )
-      .subscribe(
-        res => {
-          console.log(res);
-        }
-      );
-    return null;
+    ));
+
+
+    return res.toString();
   }
 
   // Set session token
-  async setSessionToken(): Promise<any> {
+  async setSessionToken(token: string): Promise<any> {
     // pillamos el token usando la funcion anterior
-    const token = await this.getLogInToken('ara', '1234');
     // Creamos la variable de sesion
     localStorage.setItem('sessionToken', token);
   }
