@@ -8,6 +8,10 @@ export class UserService {
 
   private baseUrl: String = 'http://localhost:8080/';
 
+  //! Borrar en cuanto tengamos test
+  private username: string = 'ara'
+  private password: string = '4'
+
   lUsuarios = signal<Usuario[]>([
     { nombre: 'Antonio', apellidos: 'Hernandez', usuario: 'antonio' },
     { nombre: 'Maria', apellidos: 'Hernandez', usuario: 'maria' },
@@ -15,13 +19,36 @@ export class UserService {
     { nombre: 'Luis', apellidos: 'Hernandez', usuario: 'luis' },
   ]);
 
+
+
+
+
   addToUsers(user: Usuario) {
     this.lUsuarios.set([...this.lUsuarios(), user])
   }
 
   // Fetches the users from the server, needs base auth header
-  fetchUsers() {
+  async fetchUsers(): Promise<any> {
 
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: 'Basic ' + btoa(`ara:1234`),
+    });
+
+    var body = {
+      username: this.username,
+      password: this.password
+    }
+
+    this.http.post(
+      `${this.baseUrl}token`, body, { headers, responseType: 'text' }
+    )
+      .subscribe(
+        res => {
+          console.log(res);
+        }
+      );
+    return null;
   }
 
   constructor(private http: HttpClient) { }

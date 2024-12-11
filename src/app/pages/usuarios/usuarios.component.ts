@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { Usuario } from '../../models/Usuario';
 import { UserCardComponent } from './user-card/user-card.component';
 import { UserService } from '../../services/user-service.service';
@@ -9,7 +9,16 @@ import { UserService } from '../../services/user-service.service';
   templateUrl: './usuarios.component.html',
   styleUrl: './usuarios.component.sass'
 })
-export class UsuariosComponent {
+export class UsuariosComponent implements OnInit {
+
+  async ngOnInit() {
+    try {
+      const userData = await this.userService.fetchUsers();
+      //console.log('Datos recibidos:', userData);
+    } catch (error) {
+      console.error('Error al obtener los datos:', error);
+    }
+  }
 
   // Creamos una lista de usuarios hardcodeados
   userService = inject(UserService)
