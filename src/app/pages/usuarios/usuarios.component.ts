@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Usuario } from '../../models/Usuario';
 import { UserCardComponent } from './user-card/user-card.component';
 import { UserService } from '../../services/user-service.service';
