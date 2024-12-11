@@ -1,9 +1,12 @@
 import { Injectable, signal } from '@angular/core';
 import { Usuario } from '../models/Usuario';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+
+  private baseUrl: String = 'http://localhost:8080/';
 
   lUsuarios = signal<Usuario[]>([
     { nombre: 'Antonio', apellidos: 'Hernandez', usuario: 'antonio' },
@@ -16,5 +19,10 @@ export class UserService {
     this.lUsuarios.set([...this.lUsuarios(), user])
   }
 
-  constructor() { }
+  // Fetches the users from the server, needs base auth header
+  fetchUsers() {
+
+  }
+
+  constructor(private http: HttpClient) { }
 }

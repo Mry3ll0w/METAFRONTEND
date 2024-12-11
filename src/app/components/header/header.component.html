@@ -3,13 +3,13 @@
     <!-- USANDO SIGNALS -->
 <!-- {{title()}} -->
 <span class="text-decoration-none text-2xl">METAFRONTEND</span>
-<!-- <app-primary-button label="Perfil" (handleButtonClick)="showButtonClicked()"></app-primary-button> -->
+<!-- <app-primary-button label="Perfil" (handleButtonClick)="addUserButtonClicked()"></app-primary-button> -->
 <!-- Metemos en el atributo label el valor de la signal de la clase padre btnLabel -->
 <!-- 
         Renta hacerlo si vamos a pasarle valores signal variables, 
         si no usamos la normal label="Perfil" y el evento 
     
-    <app-primary-button [label]="btnLabel()" (handleButtonClick)="showButtonClicked()"></app-primary-button>
+    <app-primary-button [label]="btnLabel()" (handleButtonClick)="addUserButtonClicked()"></app-primary-button>
 </div> -->
 
 <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar" type="button"
@@ -35,7 +35,8 @@
         </a>
         <ul class="text-decoration-none space-y-2 font-medium">
             <li>
-                <app-primary-button [label]="btnLabel()" (handleButtonClick)="showButtonClicked()"></app-primary-button>
+                <app-primary-button [label]="btnLabel()"
+                    (handleButtonClick)="addUserButtonClicked()"></app-primary-button>
             </li>
 
         </ul>

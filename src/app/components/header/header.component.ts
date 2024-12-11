@@ -14,7 +14,8 @@ export class HeaderComponent {
   btnLabel = signal<string>('Agregar Usuario');
   // Para comunicarnos con los hijos usaremos eventos
   userService = inject(UserService)
-  showButtonClicked() {
+
+  addUserButtonClicked() {
     // Call create service
     var testUser: Usuario = { nombre: 'Antonio', apellidos: 'Hernandez', usuario: 'antonio' };
     this.userService.addToUsers(testUser);
