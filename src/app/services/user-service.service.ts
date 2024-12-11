@@ -3,12 +3,17 @@ import { Usuario } from '../models/Usuario';
 @Injectable({
   providedIn: 'root'
 })
-export class UserServiceService {
+export class UserService {
 
-  lUsers = signal<Usuario[]>([]);
+  lUsuarios = signal<Usuario[]>([
+    { nombre: 'Antonio', apellidos: 'Hernandez', usuario: 'antonio' },
+    { nombre: 'Maria', apellidos: 'Hernandez', usuario: 'maria' },
+    { nombre: 'Pedro', apellidos: 'Hernandez', usuario: 'pedro' },
+    { nombre: 'Luis', apellidos: 'Hernandez', usuario: 'luis' },
+  ]);
 
   addToUsers(user: Usuario) {
-    this.lUsers.set([...this.lUsers(), user])
+    this.lUsuarios.set([...this.lUsuarios(), user])
   }
 
   constructor() { }

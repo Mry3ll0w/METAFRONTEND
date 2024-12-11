@@ -1,5 +1,5 @@
 <div class="p-8 grid grid-cols-2 gap-6 relative">
-    @for (usuario of lUsuarios(); track $index) {
+    @for (usuario of userService.lUsuarios(); track $index) {
     <app-user-card [user]="usuario"></app-user-card>
     }
 

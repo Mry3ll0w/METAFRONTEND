@@ -1,6 +1,7 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { Usuario } from '../../models/Usuario';
 import { UserCardComponent } from './user-card/user-card.component';
+import { UserService } from '../../services/user-service.service';
 
 @Component({
   selector: 'app-usuarios',
@@ -11,12 +12,7 @@ import { UserCardComponent } from './user-card/user-card.component';
 export class UsuariosComponent {
 
   // Creamos una lista de usuarios hardcodeados
-  lUsuarios = signal<Usuario[]>([
-    { nombre: 'Antonio', apellidos: 'Hernandez', usuario: 'antonio' },
-    { nombre: 'Maria', apellidos: 'Hernandez', usuario: 'maria' },
-    { nombre: 'Pedro', apellidos: 'Hernandez', usuario: 'pedro' },
-    { nombre: 'Luis', apellidos: 'Hernandez', usuario: 'luis' },
-  ]);
+  userService = inject(UserService)
   //! USAR HTTP CLIENT PARA CONSULTAR A LA API DE LA UBICACION
 
 }
