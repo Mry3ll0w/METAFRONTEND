@@ -38,14 +38,18 @@ export class AuthService {
   }
 
   // Set session token
-  async setSessionToken(token: string): Promise<any> {
+  setSessionToken(token: string) {
     // pillamos el token usando la funcion anterior
     // Creamos la variable de sesion
     localStorage.setItem('sessionToken', token);
   }
 
+  getSessionToken() {
+    return localStorage.getItem('sessionToken')
+  }
+
   // Erase session token
-  async eraseSessionToken(): Promise<any> {
+  eraseSessionToken() {
     localStorage.setItem('sessionToken', '');
   }
 

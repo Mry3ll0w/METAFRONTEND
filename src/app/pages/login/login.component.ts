@@ -1,6 +1,7 @@
 import { Component, inject, input, OnInit, signal } from '@angular/core';
 import { PrimaryButtonComponent } from "../../components/primary-button/primary-button.component";
 import { AuthService } from '../../services/auth-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -17,6 +18,8 @@ export class LoginComponent implements OnInit {
   username = signal<string>('');
   password = signal<string>('');
 
+  // CTOR
+  constructor(private router: Router) { }
 
   // Funcion para hacer Login
   handleLogin() {
@@ -53,9 +56,22 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.username.set('');
-    this.password.set('');
+    // Primero comprobamos que no exista una session
+
+    if (this.authService.getSessionToken() == '') {
+      // Limpiamos la session 
+      this.username.set('');
+      this.password.set('');
+    }
+    else {// Ya esta logg, lo mandamos a /
+      this.router.navigate(['/'], {
+        queryParams: {}, // Optional query parameters
+      });
+    }
+
 
   }
+
+
 
 }
