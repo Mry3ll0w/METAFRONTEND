@@ -1,6 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
+import { StorageService } from './localStorage/local-storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +9,8 @@ import { lastValueFrom } from 'rxjs';
 export class AuthService {
 
   private baseUrl: String = 'http://localhost:8080/';
+  private localStorageService = inject(StorageService);
+
 
   //! Borrar en cuanto tengamos test
   // Fetches the users from the server, needs base auth header
@@ -38,20 +41,25 @@ export class AuthService {
   }
 
   // Set session token
-  setSessionToken(token: string) {
+  async setSessionToken(token: string): Promise<any> {
     // pillamos el token usando la funcion anterior
     // Creamos la variable de sesion
-    localStorage.setItem('sessionToken', token);
+    this.localStorageService.setItem('sessionToken', token);
   }
 
-  getSessionToken() {
-    return localStorage.getItem('sessionToken')
+  async getSessionToken(): Promise<any> {
+    return this.localStorageService.getItem('sessionToken');
   }
 
   // Erase session token
-  eraseSessionToken() {
-    localStorage.setItem('sessionToken', '');
+  async eraseSessionToken(): Promise<any> {
+    //! NO FUNCIONA EL HEADER OCULTO
+    this.localStorageService.removeItem('sessionToken');
   }
 
   constructor(private http: HttpClient) { }
+
+
+
+
 }

@@ -1,7 +1,8 @@
-import { Component, inject, input, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { PrimaryButtonComponent } from "../../components/primary-button/primary-button.component";
 import { AuthService } from '../../services/auth-service.service';
 import { Router } from '@angular/router';
+import { HeaderService } from '../../services/header.service';
 
 @Component({
   selector: 'app-login',
@@ -11,8 +12,9 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  // Servicio 
+  // Servicios
   authService = inject(AuthService)
+  headerService = inject(HeaderService)
 
   // Variables
   username = signal<string>('');
@@ -32,9 +34,14 @@ export class LoginComponent implements OnInit {
 
     this.authService.getLogInToken(this.username(), this.password())
       .then((res) => {
-        console.log("Valor de token " + res);
+
         if (res.success) {
           this.authService.setSessionToken(res.token ?? '');
+          // Redireccionamos a la pagina principal
+          this.headerService.setShowHeaderContent(true);
+          console.log("Valor de show " + this.headerService.showHeaderContent());
+          this.router.navigate(['/']);
+
         } else {
           // Mostramos modal de error de login y borramos el token
           this.authService.eraseSessionToken();
@@ -58,7 +65,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     // Primero comprobamos que no exista una session
 
-    if (this.authService.getSessionToken() == '') {
+    if (this.authService.getSessionToken().toString() == '') {
       // Limpiamos la session 
       this.username.set('');
       this.password.set('');
@@ -69,6 +76,8 @@ export class LoginComponent implements OnInit {
       });
     }
 
+    // Avisamos al servicio que oculte el header
+    this.headerService.setShowHeaderContent(false);
 
   }
 

@@ -2,7 +2,7 @@
 <div class="text-decoration-none bg-slate-400 px-4 py-3 shadow-md flex justify-between items-center">
     <!-- USANDO SIGNALS -->
 <!-- {{title()}} -->
-@if (showHeaderContent()) {
+@if (showHeaderContent() ) {
 <div>
     <span class="text-decoration-none text-2xl">METAFRONTEND</span>
     <!-- <app-primary-button label="Perfil" (handleButtonClick)="addUserButtonClicked()"></app-primary-button> -->
@@ -47,7 +47,14 @@
                 </li>
 
             </ul>
+            <div class="w-full absolute bottom-0 mt-auto px-3 py-4 content-center">
+                <!-- Element to position at the bottom -->
+                <button class="ml-4 w-200 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
+                    Cerrar sesión
+                </button>
+            </div>
         </div>
+
     </aside>
 </div>
 }
