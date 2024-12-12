@@ -18,11 +18,12 @@ export class UsuariosComponent implements OnInit {
     try {
 
       const userData = await this.userService.fetchUsers();
-      //console.log('Datos recibidos:', userData);
+      console.log('Datos recibidos:', userData);
     } catch (error) {
       console.error('Error al obtener los datos:', error);
     }
   }
+
 
   // Creamos una lista de usuarios hardcodeados
   userService = inject(UserService)

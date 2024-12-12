@@ -1,16 +1,16 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, signal, inject } from '@angular/core';
 import { Usuario } from '../models/Usuario';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { StorageService } from './localStorage/local-storage.service';
+import { map } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
   private baseUrl: String = 'http://localhost:8080/';
+  private localStorageService = inject(StorageService);
 
-  //! Borrar en cuanto tengamos test
-  private username: string = 'ara'
-  private password: string = '4'
 
   lUsuarios = signal<Usuario[]>([
     { nombre: 'Antonio', apellidos: 'Hernandez', usuario: 'antonio' },
@@ -32,23 +32,18 @@ export class UserService {
 
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: 'Basic ' + btoa(`ara:1234`),
+      Authorization: 'Bearer ' + this.localStorageService.getItem('sessionToken'),
     });
-
-    var body = {
-      username: this.username,
-      password: this.password
+    console.log("URL DE userFetch " + `${this.baseUrl}user`)
+    const data = this.http.get(
+      `${this.baseUrl}user`, { headers }
+    ).subscribe((d) => {
+      console.log(d)
     }
+    );
 
-    this.http.post(
-      `${this.baseUrl}token`, body, { headers, responseType: 'text' }
-    )
-      .subscribe(
-        res => {
-          console.log(res);
-        }
-      );
-    return null;
+
+    return data;
   }
 
   constructor(private http: HttpClient) { }

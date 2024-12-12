@@ -37,7 +37,8 @@ export class HeaderComponent implements OnInit {
     this.userService.addToUsers(testUser);
   }
 
-  testFunction() {
-    console.log("hola desde test function");
+  async testFunction(): Promise<void> {
+    const data = await this.userService.fetchUsers()
+    console.log(data)
   }
 }
