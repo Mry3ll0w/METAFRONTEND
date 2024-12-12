@@ -11,16 +11,8 @@ export class UserService {
   private baseUrl: String = 'http://localhost:8080/';
   private localStorageService = inject(StorageService);
 
-
-  lUsuarios = signal<Usuario[]>([
-    { nombre: 'Antonio', apellidos: 'Hernandez', usuario: 'antonio' },
-    { nombre: 'Maria', apellidos: 'Hernandez', usuario: 'maria' },
-    { nombre: 'Pedro', apellidos: 'Hernandez', usuario: 'pedro' },
-    { nombre: 'Luis', apellidos: 'Hernandez', usuario: 'luis' },
-  ]);
-
-
-
+  // Signal encargado de mostrar los elementos en el template
+  lUsuarios = signal<Usuario[]>([]);
 
 
   addToUsers(user: Usuario) {
@@ -28,22 +20,21 @@ export class UserService {
   }
 
   // Fetches the users from the server, needs base auth header
-  async fetchUsers(): Promise<any> {
+  async fetchUsers(): Promise<void> {
+
 
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: 'Bearer ' + this.localStorageService.getItem('sessionToken'),
     });
     console.log("URL DE userFetch " + `${this.baseUrl}user`)
-    const data = this.http.get(
+    this.http.get<Usuario[]>(
       `${this.baseUrl}user`, { headers }
     ).subscribe((d) => {
-      console.log(d)
+      this.lUsuarios.set(d)
     }
     );
 
-
-    return data;
   }
 
   constructor(private http: HttpClient) { }

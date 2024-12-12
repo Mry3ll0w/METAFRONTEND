@@ -4,6 +4,7 @@ import { UserService } from '../../services/user-service.service';
 import { Usuario } from '../../models/Usuario';
 import { Router } from '@angular/router';
 import { HeaderService } from '../../services/header.service'; // Inyectar el servicio
+import { AuthService } from '../../services/auth-service.service';
 
 @Component({
   selector: 'app-header',
@@ -15,6 +16,7 @@ export class HeaderComponent implements OnInit {
 
   // Inyectar el servicio HeaderService
   headerService = inject(HeaderService);
+  authService = inject(AuthService)
 
   // Usar directamente la señal desde el servicio
   showHeaderContent = this.headerService.showHeaderContent;
@@ -28,7 +30,6 @@ export class HeaderComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit(): void {
-    // Escuchar cambios de la señal showHeaderContent para realizar alguna acción
 
   }
 
@@ -37,8 +38,13 @@ export class HeaderComponent implements OnInit {
     this.userService.addToUsers(testUser);
   }
 
+  async signOutButtonHandler(): Promise<void> {
+    this.authService.eraseSessionToken();
+    this.router.navigate(['/login'])
+  }
+
+  // Para testing
   async testFunction(): Promise<void> {
-    const data = await this.userService.fetchUsers()
-    console.log(data)
+
   }
 }
