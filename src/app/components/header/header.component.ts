@@ -41,8 +41,7 @@ export class HeaderComponent implements OnInit {
   }
 
   addUserButtonClicked() {
-    var testUser: Usuario = { nombre: 'Antonio', apellidos: 'Hernandez', usuario: 'antonio' };
-    this.userService.addToUsers(testUser);
+    this.router.navigate(['/']);
   }
 
   async signOutButtonHandler(): Promise<void> {

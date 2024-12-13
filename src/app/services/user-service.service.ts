@@ -1,8 +1,8 @@
 import { Injectable, signal, inject } from '@angular/core';
 import { Usuario } from '../models/Usuario';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { StorageService } from './localStorage/local-storage.service';
-import { map } from 'rxjs';
+import { lastValueFrom, map, retry } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
@@ -35,6 +35,30 @@ export class UserService {
     }
     );
 
+  }
+
+  // Fetches the users from the server, needs base auth header
+  async fetchUser(username: string): Promise<{ usuario: Usuario, status: number }> {
+    let user: Usuario = { nombre: '', apellidos: '', usuario: '' };
+    try {
+
+
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + this.localStorageService.getItem('sessionToken'),
+      });
+
+      const requestUserData = await lastValueFrom<Usuario>(this.http.get<Usuario>(
+        `${this.baseUrl}user/${username}`, { headers }
+      ))
+
+      return { usuario: requestUserData, status: 200 }
+    } catch (error) {
+      if (error instanceof HttpErrorResponse) {
+        return { usuario: user, status: error.status }
+      }
+    }
+    return { usuario: user, status: 500 }
   }
 
   constructor(private http: HttpClient) { }
