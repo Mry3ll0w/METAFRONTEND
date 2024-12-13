@@ -1,6 +1,12 @@
+<div class="mt-5 flex-col justify-center object-contain">
+    <div>
+        <p class="h3 font-bold text-gray-950">
+            Usuarios existentes (Medicos y Pacientes)
+        </p>
+    </div>
+</div>
 <div class="p-8 grid grid-cols-2 gap-6 relative">
     @for (usuario of userService.lUsuarios(); track $index) {
     <app-user-card [user]="usuario"></app-user-card>
     }
-
 </div>
