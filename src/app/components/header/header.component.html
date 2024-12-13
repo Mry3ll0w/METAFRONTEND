@@ -3,59 +3,33 @@
     <!-- USANDO SIGNALS -->
 <!-- {{title()}} -->
 @if (showHeaderContent() ) {
-<div>
-    <span class="text-decoration-none text-2xl">METAFRONTEND</span>
-    <!-- <app-primary-button label="Perfil" (handleButtonClick)="addUserButtonClicked()"></app-primary-button> -->
-    <!-- Metemos en el atributo label el valor de la signal de la clase padre btnLabel -->
-    <!-- 
-                Renta hacerlo si vamos a pasarle valores signal variables, 
-                si no usamos la normal label="Perfil" y el evento 
-            
-            <app-primary-button [label]="btnLabel()" (handleButtonClick)="addUserButtonClicked()"></app-primary-button>
-        </div> -->
 
-    <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar"
-        type="button"
-        class="text-decoration-none inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
-        <span class="text-decoration-none sr-only">Open sidebar</span>
-        <svg class="text-decoration-none w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg">
-            <path clip-rule="evenodd" fill-rule="evenodd"
-                d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z">
-            </path>
-        </svg>
-    </button>
-
-    <aside id="logo-sidebar" class="text-decoration-none fixed top-0 left-0 z-40 w-64 
-                h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
-        <div class="text-decoration-none h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
-            <a href="/" class="text-decoration-none flex items-center ps-2.5 mb-5">
+<nav class="flex justify-between items-center bg-slate-600 text-sm font-medium">
+    <ul class="mt-3 flex justify-between items-center text-gray-600 dark:text-gray-400 text-sm font-medium">
+        <li class="mr-6 hover:text-gray-900 dark:hover:text-white">
+            <a href="/" class="text-decoration-none flex items-center ps-2.5 ">
                 <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxAREhAQEBATEBAVEBMbEBUVEBcQEBAVIBciIiAdHx8kKDQkJCYxIB8ZJTIlMSs3LzExGx81RDMuNyotMDcBCgoKDg0OGhAQGy0lHx0rLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLTctNy03Ky0tLSsrKysrN//AABEIAMgAyAMBEQACEQEDEQH/xAAcAAEAAgMBAQEAAAAAAAAAAAAABQYDBAcIAgH/xABGEAABAwICBQgFCQYFBQAAAAABAAIDBBEFBgcSITFREyIyQWFxkbEzUnKhwQgUIzRCc3SBshY1Q4KS0RVTYuHxFySDk6L/xAAbAQEAAgMBAQAAAAAAAAAAAAAAAQIDBQYEB//EAC4RAAIBBAICAQMDAwUBAAAAAAABAgMEBREhMRJBMhMiMxU0USMkQhRhcYGRUv/aAAwDAQACEQMRAD8A5csxhCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAo76AUvgcBR2N6Cl79E99BCAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAI1slcdmxS0Usl+TYXAbz1LBUuKVPiTPRRtatX4IxzwOYdV7S08CFenVjUXBjqUp0uJoxq62jFpLkKQEAQBAEAQBAFHQ7Cck6QU7I0FHBPLCneuCNhEhwuQm/5J4CAKB0FL4I4TCaAUck/8IJwxz6CnvojoKHwSuWXjAGgQR24G/iuVyEm67O1xkUreJGZwaPojbbzvgvdiJN+SNbnopeLK0t6c2FHYCnkngKP+SAhIUkdBQ+BwFICjXJK6PqOMuIa0XJNgOKipUUFstSpub0iz0GW2AAzEuPWAbNC0NxlJN6gdLa4aOt1OSQGDU/8AlDxK8bv6/uRsFjLf3E063LkTgTF9G7q2ktK9NDJ1F8+Tx3OGpy5hwQlHg0r5HRkagaeeTuHdxWzrX1ONPyRp6ONq1Kvg+F7LFT4BTtG1uueJJ8lpqmSrS6ZvqWJt49oyPwSnP8MDuJCrHIV17Ms8XbP/ABITFsAMYL4yXNHSB6QW0tMiqn2z7NLe4h0l50+iCW3XWkaN/wAm3h2HvmdqsGwdIncF5bi5hRX3dnrtLSdd8Lgs1Ll6Bo5wMh4k2HgFpKuUqzf28I6Shh6EFufLNl2D052ck38rhYFf1/8A6PQ8bbPjxIvEMtixdCbH1Sb37ivdbZOXVQ1l3h463S/8K09pBIIsQbEcFvIyUls52cHCWmXjAvQRez8Vyt9+4Z2mNX9vEy12HxzavKAm26xssdG6qUW3HgzXFnTuNKoQ+LYFEyJz47tLRfabgrZWl/UnNRlyai+xlKnScoeisre742+jmtc8E1hWAOkAfIdRh3D7R/stXc5KNPiHZubPFSrfdU4ROxYJTt/hg9pJK1MshXl7N5DF20f8T9kwSnP8MDuJCRyFePsTxdtL/EhMVy+YwXxkuaN4PSA+K2lrkVU+2fZpb3EOl99Pogltl1pGk9hSQFHsE9lOnBe+Q/ZFm95WpylXxio/yb3C0FKo5v0WeaUMaXONgBcrQwpuc1GJ006sacXJ+iuTZodfmRi3Vc7VuoYnfMmc9Uzck2oxJXCMVbOCLarxvF77OIXgu7N0HwbSxv1cx57JFeHb6Nh4+yDxTMAjcWMaHEdIk7AeC21rjfqR8pPRpLzLfSn4QWz5w3MQe4MkaGkmwIOy6XGMcIuUXsi1zH1ZqE1onrLVL7ZI3bXnHRQsRptSZ8bR9rm9x3Lrbet5UvM4e6oeFd00XPDaMQxtYN9uceLutc1c1nVqOTOvsraNGkooj8cxrkTycYBfbnE7mr12Vj9ReUujwZHJfQl4w7IiLMU4NyWuHAtWxni6UlwamGYrRly+Cz4dWtmYHt2dThwK0VzQdGfizpbS6jXp+SIHNlGAWygdLY7v6itvi7je4P0aPM2qUlUXsmcC9BF7PxWsvl/XbNxjf20Ua+YMRkhEepbaTe4usthbU6+0zz5S8nbRj4FerMYmlbqOIDTvAFrrdUbGnTl5I5+4yNarDwbMmXqESyXcLsZtPaeoKmQr/Tp6Xsy4q1+tU2/RdFzHMujsOIx5K/XZlDSWxNDrfaJ2HuW4oYtyj5SejRXOZ8ZeMFs/KHMus4NkYGgm1wdg70r4vxj5ReyLbM+UvGa0WFaflM33Ek0UXGqYRzPaNgvdvcV1dlW+pRTOJyFD6VaUTRXsPAE2H1otOUBzJD/rHkufy73JM6jCLUGzdzE61PJ/L5ry46K+uj25aX9vLRSV1K5OL/3RL5XcROBxa6612TS+jybbDyf10vTLiVzUeZJHXT+LZzuc3c4neXG/iuyopKKOArtuo2z5Y6xBG8FWqacWVpPU00dGC4uXEj6DD4oq2JNHz1ntRrfW8v7M5m5ju+LStA97Z06X2pEPV5fZI9zzI67jfcNi2dLJTpRUNGorYmNWbm3yYf2Xj/zH+AWT9Wn/AAYf0OH8kjhmHNgaWtcXAm+1eK6uZV5eTRsrS0VvHxizTzWRyI48oLeBXqxa/qbPFmfwm1gXoIvZ+K81+v6zPTjP20SMzhui73fBe/Ea3I1ue1qLKyt974Obb/gteUWDk3ni/wAgueyr+9I6nCR1Bv8Ak3cflLYJCNhIA8SvLj4KVZbPbk5uFu9FHXV6WuDiN7YVZa8WWj8kdFg6LfZHkuNq8SbPoFH8aKpmsfTD2B5lb/FfiOWzPNYhVtTTBQSWrKPo5Pb+C5/LfNHU4T8bNvMn1d/e3zC8+N/Oj1Zb9tIpS6g4v0S2WPTt9l3ktfkvws2uH/cIuRXMw7R2E/gznUvSd7RXZ0vgj5/W+bPgK0viytP5o6QFxc+2fQafxRWMR+vM741vKH7PRzlz++TLOtCzpFwtlbrswyMkewMbZriBe63lDHQqQU2c9c5apSqOCRg/aeX1Ge9Zf0qHswfrdT+B+08vqM96fpUB+t1f4I7EMSknI1yLDcALAL229rCino19zeVLh7k/+i24F6CL2fiudv8A8z2dXjV/bxZGZw3Rd7vgvdiUty0azPdQKyt92zm3rstuU/RO+8PkFzmV/IdXhd/S2Z8yfV397fNYca910Z8v+3bKWup9aOM3zwfoCpPfi0XppuSR0SEWa0HeGhcbVe5M7+itQRVM1+mHsDzK6HF/iOWzP5iFW0NMFHoktWUfRye38Fz+W+aOown42beZPq7+9vmF58b+dHry37aRSl1Bxfolssenb7LvJa/JfhZtcP8AuEXIrmYdo7CfwZzqXpO9ors6XwR8/q/NnwFafwZWn80dIC4qfyPoMPiioZgkLanWG9uoR+S6Oyh5W+jlcjU8LrZa6eZr2te03BFwufqwcJNSOnoVVUgpLkgcewV73GWIXJ6Teu/ELbWF9GMfCoaTJ42U5/UpkJ/hk+7kX/0lbX/WUvcjSuxrN9G/RZdlfteRGO3a7wXkq5OnD48ntoYerUX38GjilAYH6hNwRdp4heq2uI14bR4ru0/08/Flqy6+9PH2awPiVz+RjquzqcVLytopejDmShfKxhYNYtcbjrIKyY24jSl9xhytpOvBOK6K+3Bag/wyO8gLcu/ob7NBHGXGuYktlSXVMsLtjgb2PgfgtdlIeepxNrhpuEnTmTtVAJGOY7c4WK1VKr9OakjeV6SqxcJFSqMvTtJDQHjqINl0NPJUpR+7hnK1cRXjL7VtG/hGX3NcHzW2G4aDfb2ryXeSUo+MD22WIkpedT/wsa0nZ0WtIqOa/TD2B5ldHi3/AEjks1+UhVtTTBR60Stb5LJlOpYA9hcA4uuLnetJlaMm04nRYW4pxTi3o28z1LBCWXGs4iwvt3rBjaMvq+TR6svXh9Bw32VBdFzo5J6JHAJ2xzNc42FiL8LrxX9OU6LSNji6qhXTkXGoqmMaXucALcd/cudpUJymo6Osq3NONNybOfvNyTxK62C0jhZy22fKmXTIg+UdBp6pj2h7XAi3Hd3rkatCcajWjuqVzTlTUkyn4/O18zi03FgL8bLorCnKFBJnKZSsp124n3g+MOg5pGtGTtHWO0Kt3ZKutrsvYZF0OHyi0UuKQyDmyC/AnVK0NSzq03po6ajf0ai2mbReN9xbvWDwn6R6HUpd7Ro1eMwRg3eHO4N5xXqpWNWoeOvkqFL2VLE650zy8iw3NHALora3VGnpdnKXV07io5S6N/L2KiK7JNjHG4PqlePI2jqLyj2e/F36oPwl0WqKdjhdrg4dhutDKjOHaOmhcU59M+Z6uNgu97QO0qadCc+kVqXNKC5ZTKqvPLumj2c67e0dq6Wnbr6H05nJVbtq4+pAs2H41FKBchj+sONvArR3NhUpy+3o6K1ydKrH7uyR1xvuLd68n0p+zYfVg+mRmKY1HE0hhD5OoA3A717LawnU+RrrvJ06Pxe2bOF17ZmBw2OHSHArDc2roy0ei0vYVo+Wys5nla6bmm+q0A963uNhqjyc3l6kZ1tIiVsTUhOiW98hQ1F/Ib/6CJRXoNtvsItIcbCa/kBQku9E7fWwrEaCAKrS70Tt9JhTrXRG9s7ZlHRjQT0EEswkdNNEHF4eW8nrDZYbtnaquTRZRRxiri1HvZe+q9wvxsbKdJ9ojbT4MSeMV6Dm2FPA2wp/3RATojgKvivZfzl6YU6Xoq3J9sKdbQ1pbCdhPXQVHBPst5P0wrJa6K7fs/WuI3G3coai+0SpuPs/FOtcIh67YUkBAS2WMAmr6hlNDvO1zj0Y2De4qGyUjumGZAwigi1qhkUhA58tSW6pPceaFTbZfSRsOytgdcxwhipXjrdTFjXM/NnxUbaGkzi+kDJr8MmDQ4yQSXMLyLHtae0K6eyrRXaCjfPJHDE0uke4NYB1kqWQd6yvoroadjTUsFVPYaxffkmngG9feVRyLqJPuyrhMgLBRUh46kUbXD8xtUbY0c20j6Mo6eJ9XQ6wYzbNCTrarfWad+zgrKRGjk6uUPUeQv3dQfho/JYmZV0eZsV9NP8AfSfqKyIxeyz6PMjPxN7nOcYqWM2keBznO9Vvb29SrJ6LRjs7TR5IwmmYB80gIH2pmtlJ/NyrtstrRhxXR9hVUw2po4iRzXwARkduzYfBTsaOD5wy3Jh1S+nkOsLXifawkYdx+CsmUaNfLWBy11RHTQ9Jx5zj0WNG9xUsI73gejbDKVg14G1DwOc+YB9/5TzQFj2X0b0+T8JnaW/M6a3WYmNjcPzZZNtEnD9JWVo8OqmxxPLopI9dgd02bSLE9e7erp7KNEpo20efPx85qS5lKHWaG7HzEb7HqHakmIo6k/BMBpLRSxUEbrbBMYjIf69qrtltIjMy6MaCriL6RraeXVvG6M3hfwBG63aEUmHFHBq6jkhkkhlaWyMcWvB6iFdMo0YFJARBnaNANG0RVk9ueZGMvwAF/j7gsci8Tf0m5OxHEpo+RfEKZjOa18jmkvJ2kgA9iJpEtbIbJujnFKGsgqOUhEYeBMGyuJfGekLau3/hS2mQk0WPTdA12HazukyeMs7zcH3FREmRzzQnSNfiIc4X5OGRze/Y2/gSrSZWJetN+NTU9NDFC8x8tI4SFps4taN1+26rEtI4hQ4hNBI2WGR0cjTdrg6xurtFEz1Nh0wqqSN7wLTU7S8dXOZtHvWMyHlOZmq5zeDiFkXRjfZ6gyF+7qD8NH5LGzIujzNivpp/vpP1FZEYvZ6S0dYe2DDqRrR0og954udtPn7ljb2zIlo4NnnMc9bVTOe93Jtkc2Fl+YxgNhs49qukUbLjoIxKX5xPTl7jEYdcNJuGuDgLjhvUS4LRNz5QELb0Mn2rTNJ4jmn+/ikWJIxaAKVpkrZT0gyNoPAEknyCSETLp2xqZrqejY9zI3Rl8gBtrnWIAPYLFRFEyZyrDsTnp3iSCZ8Tx1scWq+tlNn5iWIzVDzLPK6WQ73Odc24J0D1FlykEFHTRRgc2nZYbgXat/eViZkRx7ENFWLzyPmllp3yPcS4mV+0n+VX8kU0zoOjDLtbh8U0FW9j2F7TAGPL9TYdbeBb7PvUNoskzl2miBrMTeW73wxOf7VreQCtErIoisVCA7doCkHzarb1idpI7Cz/AGWORkiY9JmesRw+s5GHkxC6JrmF0esT1Hb3hEthvRU/+ruK+tD/AOn/AHVnEqpEFmbOldiDWsqZAY2uuGNYGN1uJ4qYxRDbLLoK+vyfhn/qaqyLRLD8oH0dD95L5NSImcYVih6qyn9Qo/wsX6Asb7Mp5bq+m/23eayGNnp3IX7uoPw0fksbLro8zYr6af76T9RWRFPZ6eya4OoKIjcaWL9AWNmRHmPGYHR1E7Hgtc2aQOB6jrFZEY2dF0C0LzU1E9jybYdQu6i5zgbeAKrJlokn8oHo0PtTeTVESZGL5P8AIL1zeu0Rt2c5JCJp6fKV4qaWa3MMBYD1aweSR/8AQUxIkjliuUCA9YYfIXUkTorFxpmGPgTqbFi9mXZw5+lvFgSCYQQbEGHaD4q/iU8j5OlzFfWhH/hH91Hih5FOxbE5qqV887zJK885xFuwbFZIjZpqSAgLVo7zacNqC9wLoJAGztG+3U4do+JVWiyZ3KqpMMxmFhJjqWDaxzXaskZPvHcVTlF+yOpdGeEQHlHQlwbt+llLmDvG7xTbZGkjmul/FMPmlhjomxl0TXCWSJoaw7rNFt9tu3tV4plW0fWg6VoxBwJALqd4aCd5uDYJIRLDp/lbqULLjW1pTa+21m7VESZnG1YoepMpVLP8PpH67dQUsd3X5oszbc9ix+zKeX6lwL3kbQXOt4rIY2emsgTsOG0Tg4FraZgcb7GkDbfuWNl10easScDNMQbgyvIPEaxWRFPZ1/Q/naHkW4fUyCORhPzdzjZr2k31b8QSfcqyReLL1jGT8Pq3iWopmSSW2vBLC4dpBF1XZOj9w2voIJm4bTcmx4jc/k47BrACN/8AqN+/YjIOffKAeLULbjWvMbX225u1WiRIoOQcznDqtsxBdE5upM0byw9Y7QQCpkiEz0GHUGKQAfRVcDttt5ae7e0+BVOi5qUOR8KpjyjKWIEfaeS8N/qJATbGkcY0s1VFJW/9lqWEYEzowBG+S53W2HZbarxKMt+irSFC2JlDWPEZZsglceY5vU1x6iOo7rKskWiy34vo+wuseZ3Rc921zopCwPPE22fmo2xoxty/guFMdK9kUYttdKeVkd2AG58Ap2w0jz9jdRFJUTyQM5OF0rzG3dqtJ2BXSKM0VJAQBAZIJ3sN2Pcw8WuLT7lBJlqcRnkFpJpJBwdI5495QGspIPqOQtIc0lrgdhBsQgPuoqHyHWke6R3Fzi4+JQGJAZ21koYYxI8RnewPIYfy3KCTApIM8dZK1pjbI9rD0mh5DHd4UEmBSQEBuMxSoDdUTyhvqiVwb4XUEmCGpkY4SMe5kgNw5ri14PG4QH1WVsszteaV8r7dJ7y93iVJBgQGWCoew3je5h4tcWn3KCTLUYjPILSTSyDg6Rzh7ygNVSQEBtU+Izxi0c0kY4Nkc0e4qCTDPO951nuc88XOLj70BjUkBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAf//Z"
                     class="text-decoration-none h-6 me-3 sm:h-7" alt="Metaenlace Logo" />
                 <span class="text-decoration-none self-center text-xl font-semibold whitespace-nowrap dark:text-white">
                     {{title()}}
                 </span>
             </a>
-            <ul class="text-decoration-none space-y-2 font-medium">
-                <li>
-                    <app-primary-button [label]="addUserButtonLabel()"
-                        (handleButtonClick)="addUserButtonClicked()"></app-primary-button>
-                </li>
-                <li>
-                    <app-primary-button [label]="testButtonLabel()"
-                        (handleButtonClick)="testFunction()"></app-primary-button>
-                </li>
+        </li>
+        <li class="mr-6 hover:text-gray-900 dark:hover:text-white ">
+            <app-primary-button [label]="testButtonLabel()" (handleButtonClick)="testFunction()"></app-primary-button>
+        </li>
+        <li class="mr-6 hover:text-gray-900 dark:hover:text-white ">
+            <app-primary-button [label]="addUserButtonLabel()"
+                (handleButtonClick)="addUserButtonClicked()"></app-primary-button>
+        </li>
 
-            </ul>
-            <div class="w-full absolute bottom-0 mt-auto px-3 py-4 content-center">
-                <!-- Element to position at the bottom -->
-                <button (click)="signOutButtonHandler()"
-                    class="ml-4 w-200 bg-red-500 text-white py-2 px-4 rounded hover:bg-red-700">
-                    Cerrar sesión
-                </button>
-            </div>
-        </div>
+    </ul>
+    <a class="text-gray-900 hover:text-red-500  object-right mr-9" href="#">
+        <button (click)="signOutButtonHandler()"
+            class="ml-4 w-200 bg-red-500 text-white py-2 px-4 rounded hover:bg-red-700">
+            Cerrar sesión
+        </button>
+    </a>
+</nav>
 
-    </aside>
-</div>
 }

@@ -17,10 +17,23 @@
                 </span>
                 <input autocomplete="off" type="text" (input)="handleUserNameChange(userNameInput.value)" #userNameInput
                     class="mb-4  size-min rounded-lg p-2 border-2 border-black" placeholder="Usuario">
-                <input type="password" (input)="handlePasswordChange(passwordInput.value)" #passwordInput
+                <input name="pass" type="password" (input)="handlePasswordChange(passwordInput.value)" #passwordInput
                     class="mb-4 size-min rounded-lg p-2 border-2 border-black" placeholder="Contraseña">
-
-                <app-primary-button label="Acceder" (handleButtonClick)="handleLogin()"></app-primary-button>
+                <label for="pass" class="font-bold text-red-500 font-sans">
+                    {{error()}}
+                </label>
+                <button class="
+                        mt-4 bg-orange-500 hover:bg-orange-700
+                        border rounded-lg border-spacing-2
+                        flex
+                        w-auto
+                        h-auto
+                        font-bold text-white
+                        px-2
+                        py-1
+                    " (click)="handleLogin()">
+                    <fa-icon class="ml-2 mr-2" [icon]="faRightBracket"></fa-icon> Acceder
+                </button>
 
             </div>
         </div>

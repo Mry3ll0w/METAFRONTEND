@@ -1,12 +1,14 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, output, signal } from '@angular/core';
 import { PrimaryButtonComponent } from "../../components/primary-button/primary-button.component";
 import { AuthService } from '../../services/auth-service.service';
 import { Router } from '@angular/router';
 import { HeaderService } from '../../services/header.service';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-login',
-  imports: [PrimaryButtonComponent],
+  imports: [PrimaryButtonComponent, FontAwesomeModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.sass'
 })
@@ -19,9 +21,16 @@ export class LoginComponent implements OnInit {
   // Variables
   username = signal<string>('');
   password = signal<string>('');
+  error = signal<string>('')
+
+  // Iconos
+  faRightBracket = faRightFromBracket
 
   // CTOR
   constructor(private router: Router) { }
+
+  // Handle LoginButtonClick
+  handleLoginButtonClick = output()
 
   // Funcion para hacer Login
   handleLogin() {
@@ -39,14 +48,14 @@ export class LoginComponent implements OnInit {
           this.authService.setSessionToken(res.token ?? '');
           // Redireccionamos a la pagina principal
           this.headerService.setShowHeaderContent(true);
-          console.log("Valor de show " + this.headerService.showHeaderContent());
+          this.error.set('')
           this.router.navigate(['/']);
 
         } else {
           // Mostramos modal de error de login y borramos el token
           this.authService.eraseSessionToken();
           // Mostramos modal de error de login
-
+          this.error.set('Error de acceso.')
         }
       })
       ;
