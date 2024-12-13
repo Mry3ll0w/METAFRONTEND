@@ -57,6 +57,35 @@ export class AuthService {
     this.localStorageService.removeItem('sessionToken');
   }
 
+  async isAuthorized(): Promise<boolean> {
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + this.localStorageService.getItem('sessionToken'),
+    });
+
+    const body = {};
+
+    try {
+      const res = await lastValueFrom(
+        this.http.post(`${this.baseUrl}token`, body, { headers, responseType: 'text' })
+      );
+      // Si la solicitud fue exitosa, asumimos un 200
+      return true;
+    } catch (error) {
+
+      // Manejar errores
+      if (error instanceof HttpErrorResponse) {
+        // Verificar código de estado
+        return error.status === 200;// Si da un 401 o 403, no está autorizado
+      }
+
+    }
+
+    return true
+
+  }
+
   constructor(private http: HttpClient) { }
 
 
