@@ -3,10 +3,12 @@ import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../../../services/user-service.service';
 import { Usuario } from '../../../models/Usuario';
 import { from, lastValueFrom } from 'rxjs';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faSave } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-edit-user',
-  imports: [],
+  imports: [FontAwesomeModule],
   templateUrl: './edit-user.component.html',
   styleUrl: './edit-user.component.sass'
 })
@@ -21,9 +23,13 @@ export class EditUserComponent implements OnInit {
   username = signal<string>('');
   userDataError = signal<string>('')
 
+  // Iconos
+  saveDataIcon = faSave
+
   constructor(private route: ActivatedRoute) { }
 
   async ngOnInit(): Promise<void> {
+
     this.route.params.subscribe(params => {
       this.username.set(params['username']);
     });
@@ -35,7 +41,7 @@ export class EditUserComponent implements OnInit {
     try {
       const requestData: { usuario: Usuario, status: number } = await lastValueFrom(observable);
 
-      console.log(requestData);
+      console.log(requestData.usuario.apellidos);
 
       if (requestData.status === 200) {
         this.user.set(requestData.usuario)
