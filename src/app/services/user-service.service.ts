@@ -101,5 +101,25 @@ export class UserService {
 
   }
 
+  // Filtramos los usuarios obtenidos por usuario
+  async filterFetchedUsersByPattern(pattern: string): Promise<void> {
+
+    //Reset the fetched users
+    if (pattern === '') {
+      this.fetchUsers();
+    } else {
+      // Filtramos por los existentes
+      let filteredUsers: Usuario[] = []
+      this.lUsuarios().forEach((u) => {
+        if (u.nombre.includes(pattern) || u.apellidos.includes(pattern) || u.usuario.includes(pattern)) {
+          filteredUsers.push(u)
+        }
+      })
+      this.lUsuarios.set(filteredUsers)
+    }
+
+  }
+
+
   constructor(private http: HttpClient) { }
 }
