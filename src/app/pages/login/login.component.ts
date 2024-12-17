@@ -1,5 +1,4 @@
 import { Component, inject, OnInit, output, signal } from '@angular/core';
-import { PrimaryButtonComponent } from "../../components/primary-button/primary-button.component";
 import { AuthService } from '../../services/auth-service.service';
 import { Router } from '@angular/router';
 import { HeaderService } from '../../services/header.service';
@@ -8,7 +7,7 @@ import { faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-login',
-  imports: [PrimaryButtonComponent, FontAwesomeModule],
+  imports: [FontAwesomeModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.sass'
 })

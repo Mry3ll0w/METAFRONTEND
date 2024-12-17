@@ -61,5 +61,45 @@ export class UserService {
     return { usuario: user, status: 500 }
   }
 
+  //Update User
+  async updateUsuarioValues(usuario: string, newUserUpdates: Usuario, newPass: string): Promise<boolean> {
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + this.localStorageService.getItem('sessionToken'),
+    });
+
+    var body;
+    // Si newPass tiene un valor, agregamos el campo clave con el valor newPatch
+    if (newPass !== '') {
+      //Agregamos al campo body la password si esta ha sido cambiada
+      body = { ...newUserUpdates, clave: newPass };
+    } else {
+      body = newUserUpdates;
+    }
+
+    console.log(body)
+
+    try {
+      await lastValueFrom(
+        this.http.patch(`${this.baseUrl}user/${usuario}`, body, { headers, responseType: 'text' })
+      );
+      // Si la solicitud fue exitosa, asumimos un 200
+      return true;
+    } catch (error) {
+
+      // Manejar errores
+      if (error instanceof HttpErrorResponse) {
+        // Verificar código de estado
+        return error.status === 200;// Si da un 401 o 403, no está autorizado
+      }
+
+    }
+
+    return true
+
+
+  }
+
   constructor(private http: HttpClient) { }
 }
