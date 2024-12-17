@@ -3,6 +3,7 @@ import { UserCardComponent } from './user-card/user-card.component';
 import { UserService } from '../../services/user-service.service';
 import { HeaderService } from '../../services/header.service';
 import { Usuario } from '../../models/Usuario';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-usuarios',
@@ -13,6 +14,8 @@ import { Usuario } from '../../models/Usuario';
 export class UsuariosComponent implements OnInit {
 
   lUsers = signal<Usuario[]>([])
+
+  constructor(private router: Router) { }
 
   async ngOnInit() {
     this.headerService.setShowHeaderContent(true)
@@ -38,5 +41,9 @@ export class UsuariosComponent implements OnInit {
 
   }
 
+  // Navigate to user creation
+  handleUserCreationBtn() {
+    this.router.navigateByUrl('/createUser')
+  }
 
 }
