@@ -62,7 +62,7 @@ export class UserService {
   }
 
   //Update User
-  async updateUsuarioValues(usuario: string, newUserUpdates: Usuario, newPass: string): Promise<boolean> {
+  async updateUsuarioValues(usuario: string, newUserUpdates: Usuario, password: string): Promise<boolean> {
 
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -70,10 +70,10 @@ export class UserService {
     });
 
     var body;
-    // Si newPass tiene un valor, agregamos el campo clave con el valor newPatch
-    if (newPass !== '') {
+    // Si password tiene un valor, agregamos el campo clave con el valor newPatch
+    if (password !== '') {
       //Agregamos al campo body la password si esta ha sido cambiada
-      body = { ...newUserUpdates, clave: newPass };
+      body = { ...newUserUpdates, clave: password };
     } else {
       body = newUserUpdates;
     }
@@ -120,6 +120,37 @@ export class UserService {
 
   }
 
+
+  // Creacion de usuarios
+  async createUsuario(newUserDTO: Usuario, password: string): Promise<boolean> {
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + this.localStorageService.getItem('sessionToken'),
+    });
+
+    var body = { ...newUserDTO, clave: password, usertype: 4 };
+    console.log(body)
+    try {
+      await lastValueFrom(
+        this.http.post(`${this.baseUrl}user/create`, body, { headers, responseType: 'text' })
+      );
+      // Si la solicitud fue exitosa, asumimos un 200
+      return true;
+    } catch (error) {
+
+      // Manejar errores
+      if (error instanceof HttpErrorResponse) {
+        // Verificar código de estado
+        return error.status === 200;// Si da un 401 o 403, no está autorizado
+      }
+
+    }
+
+    return true
+
+
+  }
 
   constructor(private http: HttpClient) { }
 }
