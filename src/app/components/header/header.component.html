@@ -17,35 +17,39 @@
         </li>
 
         <li class="mr-3 hover:text-gray-900 dark:hover:text-white ">
-            <button (click)="addUserButtonClicked()"
+            <button (click)="buttonRedirection('/')"
                 class="flex ml-4 w-200 text-white py-2 px-4 rounded hover:bg-gray-800">
                 <fa-icon class="ml-2 mr-2" [icon]="usuarioIcon"></fa-icon>
                 Usuarios
             </button>
         </li>
         <li class="mr-3 hover:text-gray-900 dark:hover:text-white ">
-            <button (click)="addUserButtonClicked()" class="flex  w-200 text-white py-2 px-4 rounded hover:bg-gray-800">
+            <button (click)="buttonRedirection('/medicos')"
+                class="flex  w-200 text-white py-2 px-4 rounded hover:bg-gray-800">
                 <fa-icon class="ml-2 mr-2" [icon]="medicIcon"></fa-icon>
                 Medicos
             </button>
         </li>
 
         <li class="mr-3 hover:text-gray-900 dark:hover:text-white ">
-            <button (click)="addUserButtonClicked()" class="flex  w-200 text-white py-2 px-4 rounded hover:bg-gray-800">
+            <button (click)="buttonRedirection('/pacientes')"
+                class="flex  w-200 text-white py-2 px-4 rounded hover:bg-gray-800">
                 <fa-icon class="ml-2 mr-2" [icon]="pacienteIcon"></fa-icon>
                 Pacientes
             </button>
         </li>
 
         <li class="mr-3 hover:text-gray-900 dark:hover:text-white ">
-            <button (click)="addUserButtonClicked()" class="flex  w-200 text-white py-2 px-4 rounded hover:bg-gray-800">
+            <button (click)="buttonRedirection('/citas')"
+                class="flex  w-200 text-white py-2 px-4 rounded hover:bg-gray-800">
                 <fa-icon class="ml-2 mr-2" [icon]="citaIcon"></fa-icon>
                 Citas
             </button>
         </li>
 
         <li class="mr-3 hover:text-gray-900 dark:hover:text-white ">
-            <button (click)="addUserButtonClicked()" class="flex  w-200 text-white py-2 px-4 rounded hover:bg-gray-800">
+            <button (click)="buttonRedirection('/diagnosticos')"
+                class="flex  w-200 text-white py-2 px-4 rounded hover:bg-gray-800">
                 <fa-icon class="ml-2 mr-2" [icon]="diagnosticosIcon"></fa-icon>
                 Diagnosticos
             </button>

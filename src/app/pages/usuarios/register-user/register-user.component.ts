@@ -2,6 +2,7 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { Usuario } from '../../../models/Usuario';
 import { from, lastValueFrom } from 'rxjs';
 import { UserService } from '../../../services/user-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register-user',
@@ -31,6 +32,8 @@ export class RegisterUserComponent implements OnInit {
   ngOnInit(): void {
 
   }
+
+  constructor(private router: Router) { }
 
   // Manejo de errores de formulario
   //Comprobamos si existe el usuario
@@ -131,15 +134,10 @@ export class RegisterUserComponent implements OnInit {
     // Creamos para observar
     const observable = from(this.userService.createUsuario(this.newUsuario(), this.userPass()));
 
-    const bRes: boolean = await lastValueFrom(observable)
+    await lastValueFrom(observable)
 
-    // Si falla metemos un dialog de error 
-    if (!bRes) {
-      this.sCreationError.set('Se ha producido un error al crear al usuario, intentalo de nuevo mas tarde.')
-    } else {
-      this.sCreationError.set('')
-    }
-
+    // Lo redireccionamos 
+    this.router.navigateByUrl('/')
   }
 
 }

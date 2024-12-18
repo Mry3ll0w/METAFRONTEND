@@ -40,8 +40,8 @@ export class HeaderComponent implements OnInit {
 
   }
 
-  addUserButtonClicked() {
-    this.router.navigate(['/']);
+  buttonRedirection(route: string) {
+    this.router.navigateByUrl(route);
   }
 
   async signOutButtonHandler(): Promise<void> {
